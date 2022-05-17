@@ -1,14 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import * as React from 'react';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import TelegramLoginButton from 'react-telegram-login';
+import { TLoginButton, TLoginButtonSize } from 'react-telegram-auth';
 
 const Home: NextPage = () => {
 
-  const handleTelegramResponse = (response: any) => {
-    console.log(response);
-  };
   return (
     <div className={styles.container}>
       <Head>
@@ -21,7 +19,17 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="samplebot" />,
+        <TLoginButton
+        botName="develbot"
+        buttonSize={TLoginButtonSize.Large}
+        lang="en"
+        usePic={false}
+        cornerRadius={20}
+        onAuthCallback={(user) => {
+          console.log('Hello, user!', user);
+        }}
+        requestAccess={'write'}
+      />
 
         <p className={styles.description}>
           Get started by editing{' '}
